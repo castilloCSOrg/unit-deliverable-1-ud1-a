@@ -26,11 +26,12 @@
 *********************************************/
 
 import java.util.Scanner;
+import java.lang.Math;
 
 public class Main 
 {
   /***** CONSTANT SECTION *****/
-  public static final String decor_line = "*********************************";
+  public static final String decor_line = "**********************************************";
 
   public static void main(String[] args)
   {
@@ -65,7 +66,9 @@ public class Main
 
     //Calculations for budget
     grocery = (budget - rent - bills) * 0.6; 
-    savings =  budget - rent - bills - grocery; 
+    grocery = (Math.abs(grocery) + grocery) / 2;
+    savings =  budget - rent - bills - grocery;
+    savings =  (Math.abs(savings) + savings) / 2;
 
     /***** OUTPUT SECTION *****/
     printplan(decor_line, budget, rent, bills, grocery, savings);
@@ -94,13 +97,4 @@ public class Main
     System.out.printf("(Savings) Ahorros en dólares: %14.2f\n", savings);
     System.out.println(line);
   }
-
-  //Finds the absolute value of a number unless it is -1 or 0
-  /*
-  public static double absolutevalue(double num)
-  {
-    num = num * (((2 * num) + 1) % 2);
-    return num;
-  }
-  */
 }
