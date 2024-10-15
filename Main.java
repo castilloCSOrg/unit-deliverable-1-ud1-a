@@ -33,6 +33,13 @@ public class Main
   /***** CONSTANT SECTION *****/
   public static final String decor_line = "**********************************************";
 
+  //ANSI Codes for Font Color
+  public static final String RESET = "\u001B[0m";
+  public static final String RED = "\u001B[31m";
+  public static final String GREEN = "\u001B[32m";
+  public static final String YELLOW = "\u001B[33m";
+  public static final String BLUE = "\u001B[34m";
+
   public static void main(String[] args)
   {
     /***** DECLARATION SECTION *****/
@@ -49,9 +56,9 @@ public class Main
     /***** INTRO SECTION *****/
 
     // Query for user information
-    System.out.println("What is your monthly budget: ");
-    System.out.print("Cuál es tu presupuesto mensual: ");
-    double budget = scanner.nextDouble();
+    System.out.println("What is your monthly budget in Pesos (Please enter a whole number): ");
+    System.out.print("Cuál es tu presupuesto mensual en Pesos (Ingrese el número entero): ");
+    int budget_in_dollars = scanner.nextInt();
 
     System.out.println("What is your rent: ");
     System.out.print("Cuál es su alquiler: ");
@@ -62,7 +69,7 @@ public class Main
     bills = scanner.nextInt();
 
     /***** PROCESSING SECTION *****/
-    budget = peso_to_dollar(budget);
+    double budget = peso_to_dollar(budget_in_dollars);
 
     //Calculations for budget
     grocery = (budget - rent - bills) * 0.6; 
@@ -79,9 +86,9 @@ public class Main
   /***** STATIC METHODS *****/
 
   //Converts the user's budget from Pesos to Dollars
-  public static double peso_to_dollar(double budget)
+  public static double peso_to_dollar(int budget_in_dollars)
   {
-      budget = budget * 0.052;
+      double budget = (double)budget_in_dollars * 0.052;
       return budget;
   }
 
@@ -90,11 +97,12 @@ public class Main
   {
     System.out.println(line);
     System.out.printf("(Budget)  Presupuesto en pesos: %12.2f \n", budget/0.052);
+    System.out.println();
     System.out.printf("(Budget)  Presupuesto en dólares: %10.2f \n", budget);
     System.out.printf("(Rent)    Alquilarr en dólares:   %10.2f \n", rent);
     System.out.printf("(Bills)   Facturas en dólares: %13.2f\n", bills);
     System.out.printf("(Grocery) Comestibles en dólares: %10.2f\n", grocery);
-    System.out.printf("(Savings) Ahorros en dólares: %14.2f\n", savings);
+    System.out.printf("(Savings) Ahorros en dólares: " + GREEN + "%14.2f\n" + RESET, savings);
     System.out.println(line);
   }
 }
